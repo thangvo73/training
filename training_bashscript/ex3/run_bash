@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+    echo "Need to enter an argument"
+    exit 1
+fi
+
+for i in $*
+do
+    if [ -d "$i" ] 
+    then
+        echo "- $i is a directory";
+    elif [ -f "$i" ]
+    then
+        echo "- $i is a regular file";
+    else
+        echo "- $i is can not be verified";
+    fi
+done

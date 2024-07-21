@@ -1,0 +1,12 @@
+#!/bin/bash
+
+files=$(ls)
+
+echo "the files in the folder have all permission:"
+for file in $files 
+do
+  if [ -r "$file" ] && [ -w "$file" ] && [ -x "$file" ] 
+  then
+    echo "$file"
+  fi
+done

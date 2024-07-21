@@ -1,0 +1,22 @@
+#! /bin/bash
+
+if [ -z "$1" ]
+then
+  echo "Need to enter an argument"
+  exit 1
+fi
+
+object=$1
+
+if [ ! -e "$object" ]
+then
+  echo "File $object does not exist"
+  exit 1
+fi
+
+chmod o+rwx "$object"
+sudo chown root:root "$object"
+ln -s "$object" "link-$object"
+
+echo "object status after run bash is:"
+ls -l "$object" "link-$object"

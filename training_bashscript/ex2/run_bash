@@ -1,0 +1,11 @@
+#! /bin/bash
+echo "GID in /etc/passwd"
+for i in $(cat /etc/passwd  | cut -d: -f1)
+do
+   echo -n "- $i" ": "
+   grep "$i" /etc/group | cut -d: -f3 | tr "\n" " "
+   echo
+done
+
+# # Extract and display all group IDs from /etc/passwd
+# awk -F: '{print $4}' /etc/passwd | sort -n | uniq

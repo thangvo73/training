@@ -1,0 +1,72 @@
+#!/bin/bash
+
+check_length() 
+{
+  if [ ${#1} -ge 15 ] 
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+check_special_char() 
+{
+  if [[ $1 =~ [!@#$'&'] ]] 
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+check_word_char() 
+{
+  if [[ $1 =~ [A-Z] && $1 =~ [a-z] ]] 
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+check_number() 
+{
+  if [[ $1 =~ [0-9] ]] 
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+if [ -z "$1" ]
+then
+    echo "Need to enter an argument"
+    exit 1
+fi
+
+object=$1
+
+if check_length "$object" && check_special_char "$object" && check_word_char "$object" && check_number "$object"
+then
+  echo "The object meets all the requirements."
+else
+  echo "The object does not meet the requirements."
+  if ! check_length "$object"
+  then
+    echo "- The object should be at least 15 characters long."
+  fi
+  if ! check_special_char "$object"
+  then
+    echo "- The object should contain at least one special character (!, @, #, $, &)."
+  fi
+  if ! check_word_char "$object"
+  then
+    echo "- The object should contain both uppercase and lowercase letters."
+  fi
+  if ! check_number "$object"
+  then
+    echo "- The object should contain at least one number."
+  fi
+fi
